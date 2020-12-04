@@ -17,9 +17,9 @@
    <widget class="QLabel" name="lbl_current">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>60</x>
       <y>50</y>
-      <width>261</width>
+      <width>311</width>
       <height>61</height>
      </rect>
     </property>
@@ -50,7 +50,7 @@
      <string>Top Expense</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lbl_topexpense">
+   <widget class="QLabel" name="lbl_topxp">
     <property name="geometry">
      <rect>
       <x>20</x>
