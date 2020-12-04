@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
+    <width>402</width>
     <height>600</height>
    </rect>
   </property>
@@ -14,18 +14,18 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lbl_current">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>10</y>
-      <width>201</width>
-      <height>181</height>
+      <x>70</x>
+      <y>50</y>
+      <width>261</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>30</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -35,8 +35,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>160</y>
+      <x>20</x>
+      <y>130</y>
       <width>121</width>
       <height>61</height>
      </rect>
@@ -50,11 +50,11 @@
      <string>Top Expense</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="lbl_topexpense">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>210</y>
+      <x>20</x>
+      <y>190</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -71,9 +71,9 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>150</y>
-      <width>221</width>
+      <x>270</x>
+      <y>130</y>
+      <width>111</width>
       <height>61</height>
      </rect>
     </property>
@@ -83,14 +83,14 @@
      </font>
     </property>
     <property name="text">
-     <string>Total Weekly Expenditure</string>
+     <string>Weekly Total</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="lbl_weekly">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>210</y>
+      <x>300</x>
+      <y>190</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -104,59 +104,39 @@
      <string>KES. 200</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
+   <widget class="QTreeWidget" name="table">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>280</y>
-      <width>401</width>
-      <height>261</height>
+      <x>20</x>
+      <y>260</y>
+      <width>361</width>
+      <height>301</height>
      </rect>
     </property>
-    <property name="widgetResizable">
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="alternatingRowColors">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>399</width>
-       <height>259</height>
-      </rect>
+    <column>
+     <property name="text">
+      <string>Date $ Time</string>
      </property>
-     <widget class="QTreeWidget" name="treeWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>381</width>
-        <height>241</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <column>
-       <property name="text">
-        <string>Date $ Time</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Usage</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Total Amount</string>
-       </property>
-      </column>
-     </widget>
-    </widget>
+    </column>
+    <column>
+     <property name="text">
+      <string>Usage</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Total Amount</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -164,7 +144,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>430</width>
+     <width>402</width>
      <height>21</height>
     </rect>
    </property>
@@ -179,7 +159,6 @@
    </widget>
    <addaction name="menuFile"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAdd_Expense">
    <property name="text">
     <string>Add Expense</string>
