@@ -82,9 +82,9 @@
    <widget class="QPushButton" name="btn_add">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>120</x>
       <y>220</y>
-      <width>71</width>
+      <width>81</width>
       <height>51</height>
      </rect>
     </property>
@@ -115,6 +115,27 @@
     </property>
     <property name="text">
      <string>Track Income</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_done">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>220</y>
+      <width>81</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>DONE</string>
     </property>
    </widget>
   </widget>

@@ -124,7 +124,7 @@
     </property>
     <column>
      <property name="text">
-      <string>Date $ Time</string>
+      <string>Date &amp; Day</string>
      </property>
     </column>
     <column>

@@ -82,7 +82,7 @@
    <widget class="QPushButton" name="btn_track">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>120</x>
       <y>220</y>
       <width>81</width>
       <height>51</height>
@@ -115,6 +115,26 @@
     </property>
     <property name="text">
      <string>Track Expense</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_done">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>220</y>
+      <width>81</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>DONE</string>
     </property>
    </widget>
   </widget>

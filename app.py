@@ -1,7 +1,10 @@
 from PyQt5 import QtWidgets, uic
+import sqlite3
 import sys
 
 app = QtWidgets.QApplication([])
+db = sqlite3.connect('./data/database.db')
+cur = db.cursor()
 
 win_main = uic.loadUi('./ui/main.ui')
 win_expense = uic.loadUi('./ui/expense.ui')
@@ -24,16 +27,45 @@ def expense_ui_load():
 
 
 # Functions - Implement Functionality ^_^
-def fun_add_expense():
+def db_add():
+    # Get data from the Input Widgets
+    source = win_add.ent_src.text()
+    amount = win_add.ent_amt.text()
+    print(f"Income Recorded: {source} {amount}")
+
+def db_expense():
+    # Get data from the Input Widgets
+    usage = win_expense.ent_usage.text()
+    amount = win_expense.ent_amt.text()
+    print(f"Added to db:  {usage} {amount}")
+
+def func_done():
+    print("Back to main UI")
+
+    # Hide all windows, show main window
+    win_expense.hide()
+    win_add.hide()
+    win_main.show()
+
+def show_win_expense():
     print("clicked")
 
-def fun_add_money():
+    # Hide main window, show expense menu
+    win_main.hide()
+    win_expense.show()
+
+def show_win_add():
     print("clicked")
+
+    # Hide main window, show expense menu
+    win_main.hide()
+    win_add.show()
 
 def fun_exit():
     """Exit the Application
     """
     print("See You Next Time!")
+    db.close()
     sys.exit()
 
 def fun_report():
@@ -41,23 +73,24 @@ def fun_report():
 
 def event_handler():
     # Main Window - win_main
-    win_main.act_expense.triggered.connect(fun_add_expense) # Show the Window, Hide current Window
+    win_main.act_expense.triggered.connect(show_win_expense) # Show the Window, Hide current Window
     win_main.act_report.triggered.connect(fun_report)
-    win_main.act_add.triggered.connect(fun_add_money)
+    win_main.act_add.triggered.connect(show_win_add)
     win_main.act_exit.triggered.connect(fun_exit)
 
+    # Track Expense Window - win_expense
+    win_expense.btn_track.clicked.connect(db_expense)
+    win_expense.btn_done.clicked.connect(func_done)
 
+    # Add Cash Window - win_add
+    win_add.btn_add.clicked.connect(db_add)
+    win_add.btn_done.clicked.connect(func_done)
+
+def db_create_table():
+    cur.execute("""CREATE TABLE expenditure(date TEXT, usage TEXT, amount INTEGER)""")
+
+# db_create_table() # Ran once, that's it!
 main_ui_load()
 event_handler()
 win_main.show()
 app.exec()
-
-
-
-# toolbar = QToolBar("My main toolbar")
-# self.addToolBar(toolbar)
-
-# button_action = QAction("Your button", self)
-# button_action.setStatusTip("This is your button")
-# button_action.triggered.connect(self.onMyToolBarButtonClick)
-# toolbar.addAction(button_action)
