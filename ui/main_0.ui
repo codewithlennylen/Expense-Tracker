@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>412</width>
-    <height>552</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QLabel" name="lbl_current">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>20</y>
+      <x>80</x>
+      <y>50</y>
       <width>311</width>
       <height>61</height>
      </rect>
@@ -36,7 +36,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>90</y>
+      <y>130</y>
       <width>121</width>
       <height>61</height>
      </rect>
@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>150</y>
+      <y>190</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -72,7 +72,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>90</y>
+      <y>130</y>
       <width>111</width>
       <height>61</height>
      </rect>
@@ -90,7 +90,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>150</y>
+      <y>190</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -108,9 +108,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>260</y>
       <width>371</width>
-      <height>301</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="font">
@@ -138,6 +138,60 @@
      </property>
     </column>
    </widget>
+   <widget class="QPushButton" name="btn_expense">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>530</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Track Expense</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_add">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>530</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Add Cash</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_exit">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>530</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Exit!</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -152,11 +206,7 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="act_expense"/>
-    <addaction name="act_add"/>
-    <addaction name="act_report"/>
-    <addaction name="separator"/>
-    <addaction name="act_exit"/>
+    <addaction name="actionGenerate_Report"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -165,7 +215,7 @@
     <string>Add Expense</string>
    </property>
   </action>
-  <action name="act_report">
+  <action name="actionGenerate_Report">
    <property name="text">
     <string>Generate Report</string>
    </property>
@@ -176,21 +226,6 @@
    </property>
   </action>
   <action name="actionExit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-  </action>
-  <action name="act_expense">
-   <property name="text">
-    <string>Track Expense</string>
-   </property>
-  </action>
-  <action name="act_add">
-   <property name="text">
-    <string>Add Cash</string>
-   </property>
-  </action>
-  <action name="act_exit">
    <property name="text">
     <string>Exit</string>
    </property>

@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, uic
+import sys
 
 app = QtWidgets.QApplication([])
 
@@ -30,19 +31,33 @@ def fun_add_money():
     print("clicked")
 
 def fun_exit():
-    print("clicked")
+    """Exit the Application
+    """
+    print("See You Next Time!")
+    sys.exit()
 
 def fun_report():
     print("Coming Soon")
 
 def event_handler():
     # Main Window - win_main
-    win_main.actionAdd_Expense.clicked.connect(fun_add_expense) # Show the Window, Hide current Window
-    win_main.actionGenerate_Report.clicked.connect(fun_report)
-    win_main.actionAdd_Money.clicked.connect(fun_add_money)
-    win_main.actionExit.clicked.connect(fun_exit)
+    win_main.act_expense.triggered.connect(fun_add_expense) # Show the Window, Hide current Window
+    win_main.act_report.triggered.connect(fun_report)
+    win_main.act_add.triggered.connect(fun_add_money)
+    win_main.act_exit.triggered.connect(fun_exit)
 
 
 main_ui_load()
+event_handler()
 win_main.show()
 app.exec()
+
+
+
+# toolbar = QToolBar("My main toolbar")
+# self.addToolBar(toolbar)
+
+# button_action = QAction("Your button", self)
+# button_action.setStatusTip("This is your button")
+# button_action.triggered.connect(self.onMyToolBarButtonClick)
+# toolbar.addAction(button_action)
