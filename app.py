@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 import sqlite3
+import datetime
 import sys
 
 app = QtWidgets.QApplication([])
@@ -29,15 +30,21 @@ def expense_ui_load():
 # Functions - Implement Functionality ^_^
 def db_add():
     # Get data from the Input Widgets
+    date = get_date_day()
     source = win_add.ent_src.text()
     amount = win_add.ent_amt.text()
 
     # Add To Database
-    print(f"Income Recorded: {source} {amount}")
+    try:
+        cur.execute(f"""INSERT INTO expenditure(date, usage, amount) VALUES(?,?,?) """,(date, source, amount))
+        db.commit()
+        print(f"Added to db:  {source} {amount}")
+    except Exception as e:
+        print(f"Failed : {e}")
 
 def db_expense():
     # Get data from the Input Widgets
-    date = 'now'
+    date = get_date_day()
     usage = win_expense.ent_usage.text()
     amount = win_expense.ent_amt.text()
 
@@ -96,10 +103,25 @@ def event_handler():
     win_add.btn_add.clicked.connect(db_add)
     win_add.btn_done.clicked.connect(func_done)
 
+def get_date_day():
+    """Returns the Current Date and Day of the Week
+    """
+    # Get the Date, .split[0] - Drop the Time
+    date = str(datetime.datetime.now()).split()[0]
+    week_days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+    day_index = datetime.datetime.today().weekday() # 0-Mon, 6-Sun
+    day = week_days[day_index]
+
+    return f"{day} {date}"
+
 def db_create_table():
     cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
 
 # db_create_table() # Ran once, that's it!
+
+# print(str(datetime.datetime.now()).split()[0])
+# print(datetime.datetime.today().weekday()) # 
+print(get_date_day())
 main_ui_load()
 event_handler()
 win_main.show()
