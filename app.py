@@ -31,13 +31,23 @@ def db_add():
     # Get data from the Input Widgets
     source = win_add.ent_src.text()
     amount = win_add.ent_amt.text()
+
+    # Add To Database
     print(f"Income Recorded: {source} {amount}")
 
 def db_expense():
     # Get data from the Input Widgets
+    date = 'now'
     usage = win_expense.ent_usage.text()
     amount = win_expense.ent_amt.text()
-    print(f"Added to db:  {usage} {amount}")
+
+    # Add To Database
+    try:
+        cur.execute(f"""INSERT INTO expenditure(date, usage, amount) VALUES(?,?,?) """,(date, usage, amount))
+        db.commit()
+        print(f"Added to db:  {usage} {amount}")
+    except Exception as e:
+        print(f"Failed : {e}")
 
 def func_done():
     print("Back to main UI")
@@ -87,7 +97,7 @@ def event_handler():
     win_add.btn_done.clicked.connect(func_done)
 
 def db_create_table():
-    cur.execute("""CREATE TABLE expenditure(date TEXT, usage TEXT, amount INTEGER)""")
+    cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
 
 # db_create_table() # Ran once, that's it!
 main_ui_load()
