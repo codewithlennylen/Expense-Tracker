@@ -1,9 +1,12 @@
 from PyQt5 import QtWidgets, uic
 import sqlite3
 import datetime
+import json
 import sys
 
 app = QtWidgets.QApplication([])
+with open('./data/wallet.json','r') as wallet_file:
+    wallet = json.load(wallet_file)
 db = sqlite3.connect('./data/database.db')
 cur = db.cursor()
 
@@ -11,12 +14,15 @@ win_main = uic.loadUi('./ui/main.ui')
 win_expense = uic.loadUi('./ui/expense.ui')
 win_add = uic.loadUi('./ui/add.ui')
 
-# Get these variables from the database
-current_cash = 1000
-week_cash = 800
-peak_cash = 250
 
 def main_ui_load():
+    # Get these variables from the 
+    with open('./data/wallet.json','r') as wallet_file:
+        wallet = json.load(wallet_file)
+    current_cash = wallet["cash"]
+    week_cash = wallet["week"]
+    peak_cash = wallet["peak"]
+
     # set relevant labels
     win_main.lbl_current.setText(f"KES. {str(current_cash)}")
     win_main.lbl_topxp.setText(f"KES. {str(peak_cash)}")
@@ -50,6 +56,7 @@ def display_table_data():
 
 # Functions - Implement Functionality ^_^
 def db_add():
+    global wallet
     # Get data from the Input Widgets
     date = get_date_day()
     source = win_add.ent_src.text()
@@ -57,13 +64,21 @@ def db_add():
 
     # Add To Database
     try:
+        # Track the Event into the Database
         cur.execute(f"""INSERT INTO expenditure(date, usage, amount) VALUES(?,?,?) """,(date, source, amount))
         db.commit()
+        
+        # Add The Cash to your Wallet
+        wallet["cash"] = wallet["cash"] + int(amount)
+        with open('./data/wallet.json','w') as wallet_file:
+            json.dump(wallet, wallet_file)
+
         print(f"Added to db:  {source} {amount}")
     except Exception as e:
         print(f"Failed : {e}")
 
 def db_expense():
+    global wallet
     # Get data from the Input Widgets
     date = get_date_day()
     usage = win_expense.ent_usage.text()
@@ -71,8 +86,18 @@ def db_expense():
 
     # Add To Database
     try:
+        # Track the Event into the Database
         cur.execute(f"""INSERT INTO expenditure(date, usage, amount) VALUES(?,?,?) """,(date, usage, amount))
         db.commit()
+
+        # Update the Wallet's State
+        wallet["cash"] = wallet["cash"] - int(amount)
+        wallet["week"] = wallet["week"] + int(amount)
+        if int(amount) > wallet["peak"]: wallet["peak"] = amount
+        with open('./data/wallet.json','w') as wallet_file:
+            json.dump(wallet, wallet_file)
+
+        # Success
         print(f"Added to db:  {usage} {amount}")
     except Exception as e:
         print(f"Failed : {e}")
@@ -81,6 +106,7 @@ def func_done():
     print("Back to main UI")
 
     # Hide all windows, show main window
+    main_ui_load()
     win_expense.hide()
     win_add.hide()
     win_main.show()
@@ -136,10 +162,12 @@ def get_date_day():
     return f"{day} {date}"
 
 def db_create_table():
-    # cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
-    cur.execute("""CREATE TABLE wallet(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER)""")
+    cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
+    
+    # Instead of creating a new Table, use JSON!
+    # cur.execute("""CREATE TABLE wallet(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER)""")
 
-db_create_table() # Ran once, that's it!
+# db_create_table() # Ran once, that's it!
 
 # print(str(datetime.datetime.now()).split()[0])
 # print(datetime.datetime.today().weekday()) # 
