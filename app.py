@@ -22,10 +22,10 @@ def main_ui_load():
     win_main.lbl_topxp.setText(f"KES. {str(peak_cash)}")
     win_main.lbl_weekly.setText(f"KES. {str(week_cash)}")
 
-def expense_ui_load():
-    # Might Be Irrelevant > We only need to process data not Display!
+def display_table_data():
+    """Gets Data from The Database and displays it onto the Table Widget
+    """
     pass
-
 
 # Functions - Implement Functionality ^_^
 def db_add():
