@@ -104,27 +104,51 @@
      <string>KES. 200</string>
     </property>
    </widget>
-   <widget class="QTreeWidget" name="table">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>500</y>
       <width>371</width>
-      <height>301</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Comic Sans MS</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Made By: Lenny Ng'ang'a - 2020</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="table">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>210</y>
+      <width>321</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
     <column>
      <property name="text">
-      <string>Date &amp; Day</string>
+      <string>Day &amp; Date</string>
      </property>
     </column>
     <column>
@@ -134,7 +158,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Total Amount</string>
+      <string>Amount</string>
      </property>
     </column>
    </widget>

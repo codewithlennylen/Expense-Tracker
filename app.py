@@ -22,10 +22,31 @@ def main_ui_load():
     win_main.lbl_topxp.setText(f"KES. {str(peak_cash)}")
     win_main.lbl_weekly.setText(f"KES. {str(week_cash)}")
 
+    # Load data onto the Table Widget
+    display_table_data()
+
 def display_table_data():
     """Gets Data from The Database and displays it onto the Table Widget
     """
-    pass
+    rows = cur.execute("SELECT date,usage,amount FROM expenditure").fetchall()
+    rows.reverse() # Reverse the order to get the most recent at the top
+    print(rows)
+
+    # Clear The Table
+    # Failure to clear Data from the tableWidget will lead to duplication of Data
+    win_main.table.clearSelection() # Clear any selection to avoid errors
+    while(win_main.table.rowCount()>0):
+        win_main.table.removeRow(0) # Remove all the rows
+        win_main.table.clearSelection()
+
+    # Iterate thru the data and create n new rows based on the number of products,n in the database
+    for row, product in enumerate(rows):
+        win_main.table.insertRow(row)
+        # Iterate through the fields of a product and insert the item into a particular (row,column)
+        for column, dataItem in enumerate(product):
+            cellData = QtWidgets.QTableWidgetItem(str(dataItem)) # Format the data into a QTableWidgetItem Item!
+            win_main.table.setItem(row, column, cellData)
+
 
 # Functions - Implement Functionality ^_^
 def db_add():
@@ -115,9 +136,10 @@ def get_date_day():
     return f"{day} {date}"
 
 def db_create_table():
-    cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
+    # cur.execute("""CREATE TABLE expenditure(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, usage TEXT, amount INTEGER)""")
+    cur.execute("""CREATE TABLE wallet(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER)""")
 
-# db_create_table() # Ran once, that's it!
+db_create_table() # Ran once, that's it!
 
 # print(str(datetime.datetime.now()).split()[0])
 # print(datetime.datetime.today().weekday()) # 
